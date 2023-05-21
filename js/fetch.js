@@ -1,4 +1,4 @@
-fetch('hk.json')
+fetch('json/hk.json')
 //use then
 .then((response)=>{
     if(response.status == 404){

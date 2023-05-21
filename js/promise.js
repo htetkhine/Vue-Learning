@@ -18,10 +18,10 @@ let request = (resource)=>{
     })    
 }
 
-request('hk.json')
+request('json/hk.json')
 .then((data)=>{
     console.log(data);
-    return request('bio.json');
+    return request('json/bio.json');
 })
 .then((data)=>{
     console.log(data);

@@ -1,5 +1,5 @@
 let getJson = async ()=>{
-    let response = await fetch('hk.json');
+    let response = await fetch('json/hk.json');
         if(response.status == 404){
             throw new Error('Something was wrong in json');
         }           
