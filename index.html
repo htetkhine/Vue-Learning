@@ -6,15 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>    
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
+    <style>
+        ul{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+            line-height: 30px;
+        }
+        .active{
+            background-color: blue;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
+        {{filteredBook}}
         <div v-if="changeState">
-            <h2>{{Title}}</h2>
-            <h5>{{Name}}</h5>
-            <h6>{{Age}}</h6>
-        </div>
+            <ul v-for="Book in Books">
+                <li :class="{active:Book.isFav}">
+                    <h2>{{Book.Title}}</h2>
+                    <h4>{{Book.Name}}</h4>
+                    <h5>{{Book.Age}}</h5>
+                    <button @click="favHandler(Book)">Add Fav</button>
+                </li>                                                
+            </ul>
+        </div>        
         
         <!-- <button v-on:click="handle()">Add on</button> -->
         <button @click="changeState=!changeState">
