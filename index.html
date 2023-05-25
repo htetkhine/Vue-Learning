@@ -29,7 +29,14 @@
                     <h2>{{Book.Title}}</h2>
                     <h4>{{Book.Name}}</h4>
                     <h5>{{Book.Age}}</h5>
-                    <button @click="favHandler(Book)">Add Fav</button>
+                    <button @click="favHandler(Book)">
+                        <span v-if="!Book.isFav">
+                            Add Fav
+                        </span>
+                        <span v-else>
+                            Remove Fav
+                        </span>
+                    </button>
                 </li>                                                
             </ul>
         </div>        
