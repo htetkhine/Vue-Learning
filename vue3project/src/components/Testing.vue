@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>Product</h1>
         <table>
             <thead>
                 <tr>
