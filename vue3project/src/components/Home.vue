@@ -1,5 +1,5 @@
 <template>
-    <div class="modal" :class="{success:theme === success}">
+    <div class="modal" :class="{success:theme === 'success'}">
         <h2>{{ header }}</h2>
         <p>{{ content }}</p>        
     </div>
@@ -7,6 +7,7 @@
 
 <script>
     export default {
+        name:'Home',
         data(){
             return{
                 title: 'why not me'
@@ -18,6 +19,6 @@
 
 <style scoped>
     .success{
-        background-color: success;
+        background-color: green;
     }
 </style>

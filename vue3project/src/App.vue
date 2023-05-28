@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>hello</h1>
-    <Home header="This is header" content="Welcome to my vue project" theme="success"></Home>
+    <Home :header="header" :content="content" :theme="theme"></Home>
     <Testing></Testing>    
   </div>  
    
@@ -13,6 +13,13 @@ import Home from './components/Home.vue';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      header:'This is header',
+      content: 'Welcome to my vue project',
+      theme: 'success'
+    }
+  },
   components: {
     Testing,
     Home
