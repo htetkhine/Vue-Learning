@@ -48,8 +48,7 @@
         methods: {
             async testingData(){
                let data = await fetch('https://fakestoreapi.com/products/'); 
-               this.products = await data.json();     
-               console.log(this.products);           
+               this.products = await data.json();                    
             }
         },
     }
