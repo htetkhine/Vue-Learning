@@ -1,6 +1,7 @@
 <template>
-    <div>
-        {{ title }}
+    <div class="modal" :class="{success:theme === success}">
+        <h2>{{ header }}</h2>
+        <p>{{ content }}</p>        
     </div>
 </template>
 
@@ -10,10 +11,13 @@
             return{
                 title: 'why not me'
             }
-        }
+        },
+        props:['header','content','theme']
     }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+    .success{
+        background-color: success;
+    }
 </style>
