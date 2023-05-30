@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <h1>hello</h1>
-    <Home :header="header" :content="content" :theme="theme"></Home>
-    <Testing></Testing>    
+  <div>  
+    
+    <div v-if="opneLink">
+      <Home :header="header" :content="content" :theme="theme" @close="opneLink=false"></Home>       
+    </div>  
+    <div class="text-center">
+      <h1>Boom!! appear when you click me</h1>
+      <button @click="opneLink = true">Click me</button>
+    </div>
   </div>  
    
 </template>
 
 <script>
-import Testing from './components/Testing.vue';
 import Home from './components/Home.vue';
 
 export default {
@@ -17,11 +21,11 @@ export default {
     return {
       header:'This is header',
       content: 'Welcome to my vue project',
-      theme: 'success'
+      theme: 'success',
+      opneLink: false
     }
   },
-  components: {
-    Testing,
+  components: {    
     Home
   }
 }
