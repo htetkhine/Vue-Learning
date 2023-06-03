@@ -2,11 +2,27 @@
   <div>  
     
     <div v-if="opneLink">
-      <Home :header="header" :content="content" :theme="theme" @close="opneLink=false"></Home>       
-    </div>  
+      <Home :theme="theme" @close="opneLink=false">
+        <template v-slot:links>
+            <h1>{{ header }}</h1>
+            <p>{{ content }}</p>
+        </template>
+         
+      </Home>       
+    </div> 
+    <div v-else-if="closeLink">
+      <Home :theme="themeDelete" @close="closeLink=false">
+        <template v-slot:links>
+            <h1>{{ header }}</h1>
+            <p>{{ content }}</p>
+        </template>
+         
+      </Home>
+    </div>    
     <div class="text-center">
       <h1>Boom!! appear when you click me</h1>
       <button @click="opneLink = true">Click me</button>
+      <button @click="closeLink = true">Delete me</button>
     </div>
   </div>  
    
@@ -22,7 +38,9 @@ export default {
       header:'This is header',
       content: 'Welcome to my vue project',
       theme: 'success',
-      opneLink: false
+      themeDelete: 'delete',
+      opneLink: false,
+      closeLink: false
     }
   },
   components: {    
