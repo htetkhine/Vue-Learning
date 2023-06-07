@@ -1,7 +1,7 @@
 <template>
     <div>        
         <div v-if="isPlaying">
-            <div class="box">
+            <div class="box" @click="startGame">
                 {{ timeRanges }}       
             </div>
         </div>
@@ -9,31 +9,30 @@
     </div>
 </template>
 <script>
+
 export default {
     name: 'Home',
+
     props:['timeRanges'],
     data() {
         return {
-            isPlaying: false
+            isPlaying: false,
+            score:0
         }
     },
     mounted() {
         setTimeout(() => {
             this.isPlaying = true;
+            this.startGame();
         }, this.timeRanges);        
     },
-    created(){
-        console.log('it is created');
+    methods: {
+        startGame(){
+            setInterval(()=>{   
+                this.score+=50;                             
+            },50)
+        }
     },
-    beforeCreate(){
-        console.log('it is beforecreated');
-    },
-    updated(){
-        console.log('it is updated');
-    },
-    beforeUpdate(){
-        console.log('it is beforeupdate');
-    }
 }
 </script>
 <style scoped>
