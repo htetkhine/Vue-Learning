@@ -1,7 +1,7 @@
 <template>
     <div>        
         <div v-if="isPlaying">
-            <div class="box" @click="startGame">
+            <div class="box" @click="endTimer">
                 {{ timeRanges }}       
             </div>
         </div>
@@ -17,7 +17,8 @@ export default {
     data() {
         return {
             isPlaying: false,
-            score:0
+            score:0,
+            timer:null
         }
     },
     mounted() {
@@ -28,9 +29,14 @@ export default {
     },
     methods: {
         startGame(){
-            setInterval(()=>{   
+            this.timer=setInterval(()=>{   
                 this.score+=50;                             
             },50)
+        },
+        endTimer(){
+            clearInterval(this.timer);
+            this.isPlaying= false;  
+            this.$emit('openButton',this.score)     
         }
     },
 }
