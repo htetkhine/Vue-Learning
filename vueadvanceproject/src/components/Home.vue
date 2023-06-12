@@ -9,8 +9,8 @@
                 <form>
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label text-start d-block">Email address</label>
-                  <input v-model="name" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  <div id="emailHelp" class="form-text text-start d-block">{{ name }}</div>
+                  <input @keyup="eventWork" v-model="name" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <div id="emailHelp" class="form-text text-start d-block">{{ names }}</div>
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label text-start d-block">Password</label>
@@ -23,9 +23,9 @@
           </div>
         </div>
       </div>
-    </div>  
-    <p>{{ changeName   }}</p>      
+    </div>           
   </div>
+  
 </template>
 
 <script>
@@ -33,15 +33,18 @@
     app:'Home',
     data() {
       return {
-        name:""         
+        name:"",
+        names:[]        
       }
-    },
-    computed:{
-      changeName(){
-        
-        return this.name="mgmg";
+    },  
+    methods: {
+      eventWork(e){
+        if(e.key === ','){
+          this.names.push(this.name);
+          this.name = "";
+        }        
       }
-    }
+    },  
   }
 </script>
 
