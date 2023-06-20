@@ -41,6 +41,11 @@
     }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss"  scoped>
+    .card{
+        img{
+            width:300px;
+            height: 300px;
+        }
+    }
 </style>

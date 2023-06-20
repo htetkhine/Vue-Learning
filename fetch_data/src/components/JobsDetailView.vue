@@ -1,6 +1,6 @@
 <template>
     <div class="container" v-if="job">
-        <div class="row">
+        <div class="row gg">
             <div class="col-12">
                 <img :src="job.image" :alt="job.title">
                 <h1>{{ job.title }}</h1>
@@ -34,5 +34,10 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .gg{
+        img{
+            width:200px;
+            height: 200px;
+        }
+    }
 </style>
