@@ -1,6 +1,12 @@
 <template>
-    <div>
-        {{ job }}
+    <div class="container" v-if="job">
+        <div class="row">
+            <div class="col-12">
+                <img :src="job.image" :alt="job.title">
+                <h1>{{ job.title }}</h1>
+            </div>
+        </div>       
+
     </div>
 </template>
 
@@ -9,7 +15,7 @@
         props:['id'],
         data() {
             return {
-                job:null
+                job:null,               
             }
         },
         mounted() {
@@ -18,7 +24,7 @@
                 return response.json();
             })
             .then(data=>{
-                this.job = data
+                this.job = data                
             })
             .catch(error=>{
                 console.log(error)
