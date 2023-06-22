@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <van-button type="primary">Primary</van-button>
     <ProjectDetails></ProjectDetails>     
   </div>
 </template>
