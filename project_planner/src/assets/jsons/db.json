@@ -1,11 +1,6 @@
 {
   "projects": [
     {
-      "id": 2,
-      "title": "Web Project 2",
-      "description": "Web Project 2"
-    },
-    {
       "id": 3,
       "title": "Web Project 3",
       "description": "Web Project 3"
