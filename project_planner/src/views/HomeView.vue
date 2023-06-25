@@ -1,13 +1,10 @@
 <template>
   <div class="home" v-if="projects.length !== 0">
-    
-    <ProjectDetails @click="deleteFunction" :projects="projects" @delete="deleteItem">
-      <template #content>
-        {{ name }}        
-      </template>
+    <div v-for="project in projects" :key="project.id">
+      <ProjectDetails @click="deleteFunction" :project="project" @delete="deleteItem">      
       </ProjectDetails>
-      <p>{{ errorMessage }}</p>     
-  </div>
+    </div>     
+  </div>  
 </template>
 
 <script setup>
@@ -25,11 +22,6 @@ function deleteFunction() {
   name.value="Hein htet";
 }
 
-function deleteItem(id){
-    projects = projects.filters(deleteId=>{
-        return deleteId = id;
-    })
-}
 
 onMounted(async() => {
 //   fetch('http://localhost:3000/projects')
@@ -57,7 +49,14 @@ onMounted(async() => {
       let api = await axios.get('http://localhost:3000/projects');
       projects.value = api.data;      
     } catch (error) {      
-      errorMessage = error.message
+      // errorMessage = error.message
+      console.log(error);
     }
 })
+function deleteItem(id){    
+    projects.value = projects.value.filter(deleteId=>{
+        return deleteId.id != id;
+    })
+}
+
 </script>

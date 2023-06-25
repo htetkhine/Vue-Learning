@@ -1,25 +1,42 @@
 <template>
-    <div> 
-          <div v-for="project in projects" :key="project.id">
-              <li @click="deleteItem(project.id)">{{ project.title }}</li>
-          </div>        
-          <van-button type="primary">
-            <slot name="content"></slot>  
-          </van-button>         
+    <div class="list-view">           
+        <li @click="deleteItem(project.id)">{{ project.title }}</li>                                
     </div>
 </template>
 
-<script setup>
+<script setup>    
     import { Button } from "vant";        
-    const props = defineProps(['projects']);
+    import { ref } from "vue";
+    import axios from "axios";
+    const props = defineProps(['project']);
 
     const emits = defineEmits(['delete']);
-
-    function deleteItem(id){
-        emits('delete' , id);
+    let api = ref("http://localhost:3000/projects/")    
+    function deleteItem(projectID){         
+        let deleteRoute = api.value + projectID                            
+        // fetch(deleteRoute, { methods:"DELETE" })
+        // .then(()=>{            
+        //   emits('delete',projectID);    
+        // })
+        // .catch(error=>{
+        //     console.log(error);
+        // })
+        axios.delete(deleteRoute)
+        .then(() => {  emits('delete',projectID);  })
+        .catch(err => { console.error(err) })
     }
 </script>
 
 <style lang="scss" scoped>
-
+    .list-view{       
+            li{
+                display: block;
+                margin: 10px auto;
+                background: chocolate;
+                width: 500px;
+                height: 100px;
+                border-left: 5px solid green;
+                cursor: pointer;
+            }        
+    }
 </style>
