@@ -59,10 +59,11 @@ function deleteItem(id){
         return deleteId.id != id;
     })
 }
-// function updateState(id){
-//   projects.value = projects.value.filter(project=>{
-//        return  project.complete = "true"
-//   })
-// }
+function updateState(id){
+  let findProject = projects.value.find(project=>{
+       return  project.id === id
+  })
+    findProject.complete=!findProject.complete
+}
 
 </script>

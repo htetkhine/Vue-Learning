@@ -1,9 +1,16 @@
 <template>
     <div>
-        <van-form @submit="onSubmit">
+        <van-form @submit.prevent="submit" ref="form">
             <van-cell-group inset>                
-                <van-field type="text" placeholder="Position" label="Title" />                                
-                <van-field                    
+                <van-field 
+                    v-model="title" 
+                    type="text" 
+                    placeholder="Position" 
+                    label="Title" 
+                    :rules="[{ required: true, message: 'Title is required' }]"
+                />                                
+                <van-field 
+                    v-model="description"                   
                     rows="2"
                     autosize
                     label="Message"
@@ -11,11 +18,12 @@
                     maxlength="50"
                     placeholder="Message"
                     show-word-limit
+                    :rules="[{ required: true, message: 'Description is required' }]"
                 />            
             </van-cell-group>
             <div style="margin: 16px;">
-                <van-button round block type="primary" native-type="submit">
-                Submit
+                <van-button round block type="primary">
+                    Submit
                 </van-button>
             </div>
         </van-form>
@@ -25,14 +33,45 @@
 </template>
 
 <script setup>    
+    import { showLoadingToast,closeToast } from 'vant';  
+    import { Form, Field, CellGroup } from 'vant';
+
+    import axios from 'axios';
     import { ref } from 'vue'; 
-    const emits = defineEmits(['create']);  
-    function onSubmit(){
-        emits('create',[{
-            id:number,
-            title:text,
-            description:message
-        }])
+    
+    let title=ref('');
+    let description=ref('');
+    let api = ref("http://localhost:3000/projects/");  
+   
+    function submit(){
+        console.log('gg');
+        loading();
+        axios.post(api,{
+            title: title.value,
+            description: description.value,
+            complete: false
+        })
+    }
+
+     //loading function
+     function loading(){
+        const toast = showLoadingToast({
+        duration: 0,
+        forbidClick: true,
+        loadingType: 'spinner',
+        message: '3 seconds',
+        });
+
+        let second = 3;
+        const timer = setInterval(() => {
+        second--;
+        if (second) {
+            toast.message = `${second} seconds`;
+        } else {
+            clearInterval(timer);
+            closeToast();
+        }
+        }, 1000);
     }
    
 </script>
