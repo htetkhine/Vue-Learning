@@ -1,11 +1,9 @@
 <template>
     <div>
         <van-form @submit="onSubmit">
-            <van-cell-group inset>
-                <van-field v-model="text" label="Title" />                
-                <van-field v-model="number" type="number" label="ID" />  
-                <van-field
-                    v-model="message"
+            <van-cell-group inset>                
+                <van-field type="text" placeholder="Position" label="Title" />                                
+                <van-field                    
                     rows="2"
                     autosize
                     label="Message"
@@ -26,9 +24,7 @@
 
 </template>
 
-<script setup>
-    import { Form, Field, CellGroup } from 'vant';
-    import {Button} from 'vant';
+<script setup>    
     import { ref } from 'vue'; 
     const emits = defineEmits(['create']);  
     function onSubmit(){

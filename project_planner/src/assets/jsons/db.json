@@ -2,8 +2,15 @@
   "projects": [
     {
       "id": 3,
-      "title": "Web Project 3",
-      "description": "Web Project 3"
+      "title": "htetkhine",
+      "description": "Web Project 3",
+      "complete": false
+    },
+    {
+      "id": 4,
+      "title": "htetkhine",
+      "description": "Web Project 3",
+      "complete": "true"
     }
   ]
 }

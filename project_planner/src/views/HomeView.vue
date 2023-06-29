@@ -1,7 +1,7 @@
 <template>
   <div class="home" v-if="projects.length !== 0">
     <div v-for="project in projects" :key="project.id">
-      <ProjectDetails @click="deleteFunction" :project="project" @delete="deleteItem">      
+      <ProjectDetails @click="deleteFunction" :project="project" @delete="deleteItem" @updateState="updateState">      
       </ProjectDetails>
     </div>     
   </div>  
@@ -10,8 +10,9 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import axios from 'axios';
-import ProjectDetails from '../components/ProjectDetails';
 import { useRouter } from 'vue-router';
+
+import ProjectDetails from '../components/ProjectDetails';
 
 const router = useRouter();
 
@@ -58,5 +59,10 @@ function deleteItem(id){
         return deleteId.id != id;
     })
 }
+// function updateState(id){
+//   projects.value = projects.value.filter(project=>{
+//        return  project.complete = "true"
+//   })
+// }
 
 </script>
