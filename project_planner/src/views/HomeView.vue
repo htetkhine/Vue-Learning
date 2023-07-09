@@ -4,7 +4,7 @@
       <ProjectDetails @click="deleteFunction" :project="project" @delete="deleteItem" @updateState="updateState">      
       </ProjectDetails>
     </div>     
-  </div>  
+  </div>    
 </template>
 
 <script setup>

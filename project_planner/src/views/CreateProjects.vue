@@ -27,8 +27,10 @@
                 </van-button>
             </div>
         </van-form>
+        {{ searchResult }}
+        
     </div>    
-
+  
 
 </template>
 
@@ -37,12 +39,18 @@
     import { Form, Field, CellGroup } from 'vant';
 
     import axios from 'axios';
-    import { ref } from 'vue'; 
+    import { ref , defineProps, onMounted } from 'vue';     
     
     let title=ref('');
     let description=ref('');
+    let searchResult = props.searchResult;    
+    let props = defineProps(['searchResult']);
     let api = ref("http://localhost:3000/projects/");  
-   
+       
+    onMounted(() => {
+        console.log(searchResult);
+    }),
+    
     function submit(){
         console.log('gg');
         loading();
