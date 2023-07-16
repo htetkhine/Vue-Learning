@@ -8,12 +8,14 @@
     "json": "json-server --watch src/assets/jsons/db.json"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "axios": "^1.4.0",
+    "bootstrap": "^5.3.0",
     "core-js": "^3.8.3",
     "react-ga": "^3.3.1",
     "vant": "^4.5.0",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",

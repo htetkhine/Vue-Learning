@@ -1,32 +1,51 @@
 <template>
-    <div>
-        <van-form @submit.prevent="submit" ref="form">
-            <van-cell-group inset>                
-                <van-field 
-                    v-model="title" 
-                    type="text" 
-                    placeholder="Position" 
-                    label="Title" 
-                    :rules="[{ required: true, message: 'Title is required' }]"
-                />                                
-                <van-field 
-                    v-model="description"                   
-                    rows="2"
-                    autosize
-                    label="Message"
-                    type="textarea"
-                    maxlength="50"
-                    placeholder="Message"
-                    show-word-limit
-                    :rules="[{ required: true, message: 'Description is required' }]"
-                />            
-            </van-cell-group>
-            <div style="margin: 16px;">
-                <van-button round block type="primary">
-                    Submit
-                </van-button>
-            </div>
-        </van-form>
+    <div class="py-4"> 
+        <h3 class="mb-3">Create Your Project Here!</h3>       
+        <button :class="{'close': openModal}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <p class="m-0" v-if="openModal">Close</p>
+            <p class="m-0" v-else>Create</p>
+        </button>                   
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create Project</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <van-form @submit="submit">
+                            <van-cell-group inset>                
+                                <van-field 
+                                    v-model="title" 
+                                    type="text" 
+                                    placeholder="Position" 
+                                    label="Title" 
+                                    :rules="[{ required: true, message: 'Title is required' }]"
+                                />                                
+                                <van-field 
+                                    v-model="description"                   
+                                    rows="2"
+                                    autosize
+                                    label="Message"
+                                    type="textarea"
+                                    maxlength="50"
+                                    placeholder="Message"
+                                    show-word-limit
+                                    :rules="[{ required: true, message: 'Description is required' }]"
+                                />            
+                            </van-cell-group>
+                            <div style="margin: 16px;">
+                                <van-button round block type="primary" native-type="submit">
+                                    Submit
+                                </van-button>
+                            </div>
+                        </van-form>
+                    </div>               
+                    </div>
+                </div>
+            </div>              
+
+        
         {{ searchResult }}
         
     </div>    
@@ -39,25 +58,32 @@
     import { Form, Field, CellGroup } from 'vant';
 
     import axios from 'axios';
-    import { ref , defineProps, onMounted } from 'vue';     
-    
+    import { ref , defineProps, onMounted } from 'vue';             
+    import { useRouter } from 'vue-router';   
+
     let title=ref('');
     let description=ref('');
-    let searchResult = props.searchResult;    
+    let searchResult = props.searchResult;     
     let props = defineProps(['searchResult']);
-    let api = ref("http://localhost:3000/projects/");  
-       
-    onMounted(() => {
-        console.log(searchResult);
-    }),
+    let api = ref("http://localhost:3000/projects/");     
     
-    function submit(){
-        console.log('gg');
-        loading();
-        axios.post(api,{
+    const router = useRouter();
+       
+    const submit = ()=>{        
+        axios.post(api.value,{
             title: title.value,
             description: description.value,
             complete: false
+        })
+        .then(()=>{                        
+            router.push('/')
+            const backdropElement = document.querySelector('.modal-backdrop');
+            if (backdropElement) {
+                backdropElement.classList.remove('modal-backdrop');
+            }
+        }) 
+        .catch((err)=>{
+            console.log(err);
         })
     }
 
@@ -91,5 +117,21 @@
         display: block;
         margin: 0 auto;
         
+    }
+    button{
+        background-color: aquamarine;  
+        border:unset;
+        border-radius: 30px; 
+        padding:5px 20px; 
+        font-weight: 600;    
+        cursor: pointer;
+    }
+    button.close{
+        background-color: red;
+        border:unset;
+        border-radius: 30px; 
+        padding:5px 20px;
+        font-weight: 600;    
+        cursor: pointer;     
     }
 </style>

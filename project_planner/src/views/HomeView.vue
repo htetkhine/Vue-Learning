@@ -1,7 +1,7 @@
 <template>
   <div class="home" v-if="projects.length !== 0">
     <div v-for="project in projects" :key="project.id">
-      <ProjectDetails @click="deleteFunction" :project="project" @delete="deleteItem" @updateState="updateState">      
+      <ProjectDetails @click="deleteFunction" :project="project" @delete="deleteItem" @updateState="updateState" @editState="editState">      
       </ProjectDetails>
     </div>     
   </div>    
