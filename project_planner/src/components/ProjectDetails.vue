@@ -17,7 +17,7 @@
     import { ref } from "vue";
     import axios from "axios";
 
-    const props = defineProps(['project']);
+    const props = defineProps(['project','searchResult']);
     const emits = defineEmits(['delete','updateState']);
 
     let api = ref("http://localhost:3000/projects/");     
@@ -35,7 +35,7 @@
         .then(() => {  emits('delete',projectID);  })
         .catch(err => { console.error(err) })
     }
-    function completeItem(projectID){
+    function completeItem(projectID){        
         loading();
         let updateRoute = api.value + projectID               
         axios.patch(updateRoute,

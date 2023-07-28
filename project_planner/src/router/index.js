@@ -6,7 +6,8 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    props:true
   },
   {
     path: '/about',
@@ -21,7 +22,7 @@ const routes = [
     path: '/createProject',
     name: 'createProject',
     component: CreateProject,
-    props: true
+    // props: true
   }
 ]
 

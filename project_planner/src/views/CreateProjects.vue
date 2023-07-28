@@ -21,7 +21,8 @@
                                     placeholder="Position" 
                                     label="Title" 
                                     :rules="[{ required: true, message: 'Title is required' }]"
-                                />                                
+                                /> 
+                                {{ title }}                               
                                 <van-field 
                                     v-model="description"                   
                                     rows="2"
@@ -32,7 +33,8 @@
                                     placeholder="Message"
                                     show-word-limit
                                     :rules="[{ required: true, message: 'Description is required' }]"
-                                />            
+                                />
+                                {{ description }}            
                             </van-cell-group>
                             <div style="margin: 16px;">
                                 <van-button round block type="primary" native-type="submit">
@@ -43,33 +45,31 @@
                     </div>               
                     </div>
                 </div>
-            </div>              
-
-        
-        {{ searchResult }}
+            </div>                              
         
     </div>    
   
 
 </template>
 
-<script setup>    
-    import { showLoadingToast,closeToast } from 'vant';  
-    import { Form, Field, CellGroup } from 'vant';
+<script setup>        
+    import { Form, Field, CellGroup } from 'vant';      
+    // import postData from '../composations/postData';
+
+    import { showLoadingToast,closeToast } from 'vant';      
 
     import axios from 'axios';
-    import { ref , defineProps, onMounted } from 'vue';             
-    import { useRouter } from 'vue-router';   
-
-    let title=ref('');
-    let description=ref('');
-    let searchResult = props.searchResult;     
-    let props = defineProps(['searchResult']);
-    let api = ref("http://localhost:3000/projects/");     
+    import { ref , onMounted } from 'vue';             
+    import { useRouter } from 'vue-router';
+    
+    let api = ref("http://localhost:3000/projects/");  
+    
+    let title = ref('');
+    let description = ref('');
     
     const router = useRouter();
-       
-    const submit = ()=>{        
+    
+    let submit = ()=>{                      
         axios.post(api.value,{
             title: title.value,
             description: description.value,
@@ -86,9 +86,9 @@
             console.log(err);
         })
     }
-
-     //loading function
-     function loading(){
+    
+    //loading function
+    function loading(){
         const toast = showLoadingToast({
         duration: 0,
         forbidClick: true,
@@ -107,7 +107,6 @@
         }
         }, 1000);
     }
-   
 </script>
 
 <style lang="scss" scoped>
